@@ -41,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(0, 209, 255, 0.15) 0%, transparent 20%);
             pointer-events: none;
@@ -204,7 +204,7 @@
         }
 
         .project-card {
-            height: 340px;
+            height: 380px;
             perspective: 1200px;
             border-radius: 20px;
             overflow: hidden;
@@ -222,7 +222,7 @@
             border-radius: 20px;
         }
 
-        .project-card:hover .card-inner {
+        .project-card.flipped .card-inner {
             transform: rotateY(180deg);
         }
 
@@ -237,7 +237,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 2.5rem;
+            padding: 2rem;
             backdrop-filter: blur(12px);
             overflow: hidden;
         }
@@ -258,21 +258,25 @@
             z-index: -1;
         }
 
-        .card-back {
-            background: rgba(10, 25, 47, 0.9);
-            border: 1px solid rgba(0, 209, 255, 0.25);
-            transform: rotateY(180deg);
-            justify-content: space-between;
-            padding: 2rem;
+        .project-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
-        .project-number {
-            font-size: 1.3rem;
-            font-weight: 600;
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
         }
 
         .project-title {
@@ -280,6 +284,14 @@
             font-weight: 600;
             margin-bottom: 1.5rem;
             text-shadow: 0 0 15px rgba(230, 241, 255, 0.3);
+        }
+
+        .card-back {
+            background: rgba(10, 25, 47, 0.9);
+            border: 1px solid rgba(0, 209, 255, 0.25);
+            transform: rotateY(180deg);
+            justify-content: space-between;
+            padding: 2rem;
         }
 
         .project-desc {
@@ -509,7 +521,7 @@
             .projects-grid {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
-            
+
             .developer-avatar {
                 width: 140px;
                 height: 140px;
@@ -521,15 +533,23 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 gap: 1.8rem;
             }
-            
-            .card-front, .card-back {
-                padding: 2rem;
+
+            .project-card {
+                height: 350px;
             }
-            
+
+            .project-image {
+                height: 180px;
+            }
+
+            .card-front, .card-back {
+                padding: 1.8rem;
+            }
+
             .about-content {
                 padding: 2rem;
             }
-            
+
             .developer-message {
                 font-size: 1.1rem;
             }
@@ -539,35 +559,28 @@
             .header {
                 padding: 4rem 1.5rem 2rem;
             }
-            
+
             .projects-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .project-card {
                 height: 320px;
             }
-            
+
+            .project-image {
+                height: 160px;
+            }
+
             .social-links {
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
             }
-            
+
             .about-btn {
                 padding: 1rem 2rem;
                 font-size: 1.1rem;
-            }
-        }
-
-        /* Mobile tap for cards */
-        @media (hover: none) {
-            .project-card .card-inner {
-                transform: rotateY(180deg);
-            }
-            
-            .project-card {
-                cursor: pointer;
             }
         }
     </style>
@@ -575,7 +588,7 @@
 <body>
     <!-- Particles background -->
     <div class="particles" id="particles"></div>
-    
+
     <!-- Header -->
     <header class="header">
         <h1 class="title">WEB DEVELOPMENT PROJECTS</h1>
@@ -593,14 +606,13 @@
             <h2 class="difficulty-title easy-title">🟢 Easy Projects</h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card">
+                <div class="project-card" data-project="1">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 1</div>
+                            <div class="project-image">
+                                <img src="assets/1.png" alt="Letter Case Changer">
+                            </div>
                             <h3 class="project-title">Letter Case Changer</h3>
-                            <a href="https://simplewebdevprojects.github.io/Letter_Case_Changer/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">A simple tool that converts text between uppercase and lowercase with real-time preview.</p>
@@ -610,16 +622,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 2 -->
-                <div class="project-card">
+                <div class="project-card" data-project="2">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 2</div>
+                            <div class="project-image">
+                                <img src="assets/2.png" alt="Weather App">
+                            </div>
                             <h3 class="project-title">Weather App</h3>
-                            <a href="https://simplewebdevprojects.github.io/Weather_App/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Real-time weather application that fetches data from an API and displays current conditions with a clean UI.</p>
@@ -629,16 +640,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 3 -->
-                <div class="project-card">
+                <div class="project-card" data-project="3">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 3</div>
+                            <div class="project-image">
+                                <img src="assets/3.png" alt="GitHub Profile Finder">
+                            </div>
                             <h3 class="project-title">GitHub Profile Finder</h3>
-                            <a href="https://simplewebdevprojects.github.io/Github_Profile_Finder/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Search for GitHub profiles using the GitHub API and display user information and repositories.</p>
@@ -648,16 +658,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 4 -->
-                <div class="project-card">
+                <div class="project-card" data-project="4">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 4</div>
+                            <div class="project-image">
+                                <img src="assets/4.png" alt="Periods Tracker">
+                            </div>
                             <h3 class="project-title">Periods Tracker (FemCare)</h3>
-                            <a href="https://simplewebdevprojects.github.io/Periods_Tracker/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">A health tracking application designed to help users monitor their menstrual cycles and predict future periods.</p>
@@ -667,16 +676,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 5 -->
-                <div class="project-card">
+                <div class="project-card" data-project="5">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 5</div>
+                            <div class="project-image">
+                                <img src="assets/5.png" alt="Keyboard Simulator">
+                            </div>
                             <h3 class="project-title">Keyboard Visual Audio Simulator</h3>
-                            <a href="https://simplewebdevprojects.github.io/Keyboard_Visual_Audio_Simulator/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Interactive keyboard that produces sounds and visual effects when keys are pressed, great for learning.</p>
@@ -688,20 +696,19 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Intermediate Projects -->
         <section class="difficulty-section">
             <h2 class="difficulty-title intermediate-title">🟡 Intermediate Projects</h2>
             <div class="projects-grid">
                 <!-- Project 6 -->
-                <div class="project-card">
+                <div class="project-card" data-project="6">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 6</div>
+                            <div class="project-image">
+                                <img src="assets/6.png" alt="YouTube Clone">
+                            </div>
                             <h3 class="project-title">YouTube Clone</h3>
-                            <a href="https://simplewebdevprojects.github.io/Youtube_Clone/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">A responsive YouTube interface clone with video playback, comments, and suggested videos section.</p>
@@ -711,16 +718,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 7 -->
-                <div class="project-card">
+                <div class="project-card" data-project="7">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 7</div>
+                            <div class="project-image">
+                                <img src="assets/7.png" alt="Ping Pong Game">
+                            </div>
                             <h3 class="project-title">Ping Pong Game</h3>
-                            <a href="https://simplewebdevprojects.github.io/Ping_Pong_Game/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Classic ping pong game built with JavaScript canvas, featuring score tracking and responsive controls.</p>
@@ -730,16 +736,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 8 -->
-                <div class="project-card">
+                <div class="project-card" data-project="8">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 8</div>
+                            <div class="project-image">
+                                <img src="assets/8.png" alt="3D Visualizer">
+                            </div>
                             <h3 class="project-title">Document to 3D Visualizer</h3>
-                            <a href="https://simplewebdevprojects.github.io/Document_to_3D_Visualizer/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Transform text documents into interactive 3D visualizations using Three.js for immersive content exploration.</p>
@@ -749,16 +754,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 9 -->
-                <div class="project-card">
+                <div class="project-card" data-project="9">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 9</div>
+                            <div class="project-image">
+                                <img src="assets/9.png" alt="Browser Forensics">
+                            </div>
                             <h3 class="project-title">Browser Forensics for Safety</h3>
-                            <a href="https://simplewebdevprojects.github.io/Browser_Forensics_For_Safety/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Tool that analyzes browser data to identify security risks and provide safety recommendations.</p>
@@ -770,20 +774,19 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Advanced Projects -->
         <section class="difficulty-section">
             <h2 class="difficulty-title advanced-title">🔴 Advanced Projects</h2>
             <div class="projects-grid">
                 <!-- Project 10 -->
-                <div class="project-card">
+                <div class="project-card" data-project="10">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 10</div>
+                            <div class="project-image">
+                                <img src="assets/10.png" alt="Disorder Simulator">
+                            </div>
                             <h3 class="project-title">Disorder Simulator</h3>
-                            <a href="https://simplewebdevprojects.github.io/Disorder_Simulator/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Interactive experience that simulates various cognitive disorders to build empathy and understanding.</p>
@@ -793,16 +796,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 11 -->
-                <div class="project-card">
+                <div class="project-card" data-project="11">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 11</div>
+                            <div class="project-image">
+                                <img src="assets/11.png" alt="Physics Simulation">
+                            </div>
                             <h3 class="project-title">Physics Simulation</h3>
-                            <a href="https://simplewebdevprojects.github.io/Physics_Simulation/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Real-time physics engine simulating gravity, collisions, and particle interactions with adjustable parameters.</p>
@@ -812,16 +814,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Project 12 -->
-                <div class="project-card">
+                <div class="project-card" data-project="12">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="project-number">Project 12</div>
+                            <div class="project-image">
+                                <img src="assets/12.png" alt="Arcade Game Box">
+                            </div>
                             <h3 class="project-title">Arcade Game Box</h3>
-                            <a href="https://simplewebdevprojects.github.io/Arcade_Game_Box/" class="project-btn" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> View Project
-                            </a>
                         </div>
                         <div class="card-back">
                             <p class="project-desc">Collection of classic arcade games including Space Invaders, Snake, and Breakout in one interface.</p>
@@ -841,7 +842,7 @@
         <div class="about-content" id="aboutContent">
             <div class="developer-info">
                 <div class="developer-avatar">
-                    <img src="ayushdubey.jpeg" alt="Ayush Dubey">
+                    <img src="assets/ayushdubey.jpeg" alt="Ayush Dubey">
                 </div>
                 <div>
                     <h3 class="developer-name">Ayush Dubey</h3>
@@ -877,30 +878,44 @@
         document.getElementById('aboutBtn').addEventListener('click', function() {
             const aboutContent = document.getElementById('aboutContent');
             aboutContent.classList.toggle('active');
-            
+
             // Remove pulsating effect after first click
             this.classList.remove('pulsate');
         });
-        
+
         // Mobile tap for cards
-        if (matchMedia('(hover: none)').matches) {
-            const projectCards = document.querySelectorAll('.project-card');
-            
-            projectCards.forEach(card => {
-                card.addEventListener('click', function() {
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // For mobile, toggle flipped class
+                if (window.innerWidth <= 768) {
                     this.classList.toggle('flipped');
-                });
+                }
             });
-        }
-        
+
+            // For desktop, handle hover
+            card.addEventListener('mouseenter', function() {
+                if (window.innerWidth > 768) {
+                    this.classList.add('flipped');
+                }
+            });
+
+            card.addEventListener('mouseleave', function() {
+                if (window.innerWidth > 768) {
+                    this.classList.remove('flipped');
+                }
+            });
+        });
+
         // Create particles
         const particlesContainer = document.getElementById('particles');
         const particleCount = 30;
-        
+
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
-            
+
             // Random properties
             const size = Math.random() * 20 + 5;
             const posX = Math.random() * 100;
@@ -908,7 +923,7 @@
             const animationDuration = Math.random() * 20 + 10;
             const animationDelay = Math.random() * 5;
             const hue = Math.random() * 360;
-            
+
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             particle.style.left = `${posX}%`;
@@ -916,7 +931,7 @@
             particle.style.animationDuration = `${animationDuration}s`;
             particle.style.animationDelay = `${animationDelay}s`;
             particle.style.background = `hsla(${hue}, 70%, 60%, 0.2)`;
-            
+
             particlesContainer.appendChild(particle);
         }
     </script>
